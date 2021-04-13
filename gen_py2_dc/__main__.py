@@ -18,7 +18,7 @@ def _parse_arg() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def main(paths: Iterable[Path]) -> None:
+def print_generated_string(paths: Iterable[Path]) -> None:
     for path in paths:
         py_body: List[str] = []
         pyi_body: List[str] = []
@@ -31,6 +31,10 @@ def main(paths: Iterable[Path]) -> None:
         print('\n\n'.join(pyi_body))
 
 
-if __name__ == '__main__':
+def main() -> None:
     arg = _parse_arg()
-    main(arg.pyi)
+    print_generated_string(arg.pyi)
+
+
+if __name__ == '__main__':
+    main()

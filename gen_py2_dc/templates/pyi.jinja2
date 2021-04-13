@@ -1,8 +1,7 @@
-class {{ class_name }}Dict:
+class _{{ class_name }}Dict(TypedDict):
     {%- for name, type in fields %}
     {{ name }}: {{ type }}
     {%- endfor %}
-
 
 class {{ class_name }}:
     {%- for name, type in fields %}
@@ -13,12 +12,9 @@ class {{ class_name }}:
         {%- for name, type in fields %}
         {{ name }}: {{ type }},
         {%- endfor %}
-    ) -> None:
-        ...
+    ) -> None: ...
     {%- for name, type in fields %}
     @property
-    def {{ name }}(self) -> {{ type }}:
-        ...
+    def {{ name }}(self) -> {{ type }}: ...
     {%- endfor %}
-    def asdict(self) -> {{ class_name }}Dict:
-        ...
+    def asdict(self) -> _{{ class_name }}Dict: ...
