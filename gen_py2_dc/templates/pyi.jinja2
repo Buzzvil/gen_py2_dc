@@ -1,0 +1,24 @@
+class {{ class_name }}Dict:
+    {%- for name, type in fields %}
+    {{ name }}: {{ type }}
+    {%- endfor %}
+
+
+class {{ class_name }}:
+    {%- for name, type in fields %}
+    _{{ name }}: {{ type }}
+    {%- endfor %}
+    def __init__(
+        self,
+        {%- for name, type in fields %}
+        {{ name }}: {{ type }},
+        {%- endfor %}
+    ) -> None:
+        ...
+    {%- for name, type in fields %}
+    @property
+    def {{ name }}(self) -> {{ type }}:
+        ...
+    {%- endfor %}
+    def asdict(self) -> {{ class_name }}Dict:
+        ...

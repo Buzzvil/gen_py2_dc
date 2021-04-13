@@ -1,0 +1,29 @@
+class {{ class_name }}(object):
+    __slots__ = (
+        {%- for name, _ in fields %}
+        '_{{ name }}',
+        {%- endfor %}
+    )
+
+    def __init__(
+        self,
+        {%- for name, _ in fields %}
+        {{ name }},
+        {%- endfor %}
+    ):
+        {%- for name, _ in fields %}
+        self._{{ name }} = {{ name }}
+        {%- endfor %}
+
+    {% for name, _ in fields %}
+    @property
+    def {{ name }}(self):
+        return self._{{ name }}
+    {% endfor %}
+
+    def asdict(self):
+        return dict(
+        {%- for name, _ in fields %}
+            {{ name }}=self._{{ name }},
+        {%- endfor %}
+        )
