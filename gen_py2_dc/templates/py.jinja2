@@ -30,8 +30,8 @@ class {{ class_name }}(object):
     {% endfor %}
 
     def asdict(self):
-        return dict(
+        return {
         {%- for name, _ in fields %}
-            {{ name }}=self._{{ name }},
+            "{{ name }}": self._{{ name }},
         {%- endfor %}
-        )
+        }
